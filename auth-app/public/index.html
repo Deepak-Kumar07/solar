@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <title>Authentication Page</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap" rel="stylesheet"/>
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+        }
+    </style>
+</head>
+<body class="bg-gradient-to-r from-blue-900 to-purple-900 h-screen flex items-center justify-center">
+    <div class="bg-white rounded-lg shadow-lg flex flex-col md:flex-row w-full md:w-3/4 h-full md:h-3/4">
+        <div class="w-full md:w-1/2 flex items-center justify-center p-6 md:p-10">
+            <div id="login-form" class="w-full md:w-3/4">
+                <form onsubmit="handleLogin(event)">
+                    <div class="mb-4 relative">
+                        <label class="block text-gray-700">Username</label>
+                        <input class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-600 transition duration-300 ease-in-out transform hover:scale-105" placeholder="Enter your username or email" type="text"/>
+                        <i class="fas fa-user absolute right-3 top-10 text-gray-400"></i>
+                    </div>
+                    <div class="mb-4 relative">
+                        <label class="block text-gray-700">Password</label>
+                        <input class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-600 transition duration-300 ease-in-out transform hover:scale-105" placeholder="Enter your password" type="password"/>
+                        <i class="fas fa-lock absolute right-3 top-10 text-gray-400"></i>
+                        <a class="text-sm text-gray-500 float-right mt-1 cursor-pointer" onclick="showForgotPassword()">Forgot your password?</a>
+                    </div>
+                    <div class="mb-4">
+                        <label class="inline-flex items-center">
+                            <input class="form-checkbox text-purple-600" type="checkbox"/>
+                            <span class="ml-2 text-gray-700">Remember me</span>
+                        </label>
+                    </div>
+                    <div class="flex items-center justify-between mb-6">
+                        <button type="submit" class="bg-red-500 text-white px-4 py-2 rounded-lg transition duration-300 ease-in-out transform hover:scale-105">Login</button>
+                        <button type="button" class="bg-white border border-red-500 text-red-500 px-4 py-2 rounded-lg transition duration-300 ease-in-out transform hover:scale-105" onclick="showRegister()">Sign-up</button>
+                    </div>
+                    <div class="text-center">
+                        <span class="text-gray-500">Follow us</span>
+                        <div class="flex justify-center mt-2">
+                            <a class="text-gray-500 mx-2 transition duration-300 ease-in-out transform hover:scale-125" href="#"><i class="fab fa-facebook-f"></i></a>
+                            <a class="text-gray-500 mx-2 transition duration-300 ease-in-out transform hover:scale-125" href="#"><i class="fab fa-twitter"></i></a>
+                            <a class="text-gray-500 mx-2 transition duration-300 ease-in-out transform hover:scale-125" href="#"><i class="fab fa-instagram"></i></a>
+                        </div>
+                    </div>
+                </form>
+            </div>
+
+            <div id="register-form" class="w-full md:w-3/4 hidden">
+                <form onsubmit="handleRegister(event)">
+                    <div class="mb-4 relative">
+                        <label class="block text-gray-700">Username</label>
+                        <input class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-600 transition duration-300 ease-in-out transform hover:scale-105" placeholder="Enter your username" type="text"/>
+                        <i class="fas fa-user absolute right-3 top-10 text-gray-400"></i>
+                    </div>
+                    <div class="mb-4 relative">
+                        <label class="block text-gray-700">Email</label>
+                        <input class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-600 transition duration-300 ease-in-out transform hover:scale-105" placeholder="Enter your email" type="email"/>
+                        <i class="fas fa-envelope absolute right-3 top-10 text-gray-400"></i>
+                    </div>
+                    <div class="mb-4 relative">
+                        <label class="block text-gray-700">Password</label>
+                        <input class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-600 transition duration-300 ease-in-out transform hover:scale-105" placeholder="Enter your password" type="password"/>
+                        <i class="fas fa-lock absolute right-3 top-10 text-gray-400"></i>
+                    </div>
+                    <div class="flex items-center justify-between mb-6">
+                        <button type="submit" class="bg-red-500 text-white px-4 py-2 rounded-lg transition duration-300 ease-in-out transform hover:scale-105">Register</button>
+                        <button type="button" class="bg-white border border-red-500 text-red-500 px-4 py-2 rounded-lg transition duration-300 ease-in-out transform hover:scale-105" onclick="showLogin()">Back to Login</button>
+                    </div>
+                </form>
+            </div>
+
+            <div id="forgot-password-form" class="w-full md:w-3/4 hidden">
+                <form onsubmit="handleResetPassword(event)">
+                    <div class="mb-4 relative">
+                        <label class="block text-gray-700">Email</label>
+                        <input class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-600 transition duration-300 ease-in-out transform hover:scale-105" placeholder="Enter your email" type="email"/>
+                        <i class="fas fa-envelope absolute right-3 top-10 text-gray-400"></i>
+                    </div>
+                    <div class="flex items-center justify-between mb-6">
+                        <button type="submit" class="bg-red-500 text-white px-4 py-2 rounded-lg transition duration-300 ease-in-out transform hover:scale-105">Reset Password</button>
+                        <button type="button" class="bg-white border border-red-500 text-red-500 px-4 py-2 rounded-lg transition duration-300 ease-in-out transform hover:scale-105" onclick="showLogin()">Back to Login</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <div class="w-full md:w-1/2 bg-cover bg-center rounded-b-lg md:rounded-r-lg md:rounded-bl-none" style="background-image: url('https://placehold.co/600x800');">
+            <img alt="Space themed background with planets and stars" class="w-full h-full object-cover rounded-b-lg md:rounded-r-lg md:rounded-bl-none" height="800" src="https://storage.googleapis.com/a1aa/image/PrSkJeKY353JZSmH99eDWP4fj8Nyf0BpeBMUyZJLPoqcuiXdC.jpg" width="600"/>
+        </div>
+    </div>
+
+    <script>
+        async function handleLogin(event) {
+            event.preventDefault();
+            const username = document.querySelector('input[type="text"]').value;
+            const password = document.querySelector('input[type="password"]').value;
+
+            const response = await fetch('/login', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ username, password }),
+            });
+
+            const data = await response.json();
+            alert(data.message);
+            if (data.redirectUrl) {
+                window.location.href = data.redirectUrl; // Redirect to main application
+            }
+        }
+
+        async function handleRegister(event) {
+            event.preventDefault();
+            const username = document.querySelector('#register-form input[type="text"]').value;
+            const email = document.querySelector('#register-form input[type="email"]').value;
+            const password = document.querySelector('#register-form input[type="password"]').value;
+
+            const response = await fetch('/register', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ username, email, password }),
+            });
+
+            const data = await response.json();
+            alert(data.message);
+            // Optionally handle redirect after registration
+            if (data.redirectUrl) {
+                window.location.href = data.redirectUrl; // Redirect to login or main page
+            }
+        }
+
+        async function handleResetPassword(event) {
+            event.preventDefault();
+            const email = document.querySelector('#forgot-password-form input[type="email"]').value;
+    
+            const response = await fetch('/reset-password', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ email }),
+            });
+    
+            const data = await response.json();
+            alert(data.message);
+            if (data.redirect) {
+                window.location.href = data.redirect; // Redirect to login page
+            }
+        }
+
+        function showLogin() {
+            document.getElementById('login-form').classList.remove('hidden');
+            document.getElementById('register-form').classList.add('hidden');
+            document.getElementById('forgot-password-form').classList.add('hidden');
+        }
+
+        function showRegister() {
+            document.getElementById('login-form').classList.add('hidden');
+            document.getElementById('register-form').classList.remove('hidden');
+            document.getElementById('forgot-password-form').classList.add('hidden');
+        }
+
+        function showForgotPassword() {
+            document.getElementById('login-form').classList.add('hidden');
+            document.getElementById('register-form').classList.add('hidden');
+            document.getElementById('forgot-password-form').classList.remove('hidden');
+        }
+    </script>
+</body>
+</html>
